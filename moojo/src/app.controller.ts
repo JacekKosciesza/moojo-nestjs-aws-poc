@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { PostService } from './post.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
 import { AppService } from './app.service';
+import { CreatePostDto, CreateUserDto } from './app.types';
 
 @Controller()
 export class AppController {
@@ -56,9 +57,7 @@ export class AppController {
   }
 
   @Post('post')
-  async createDraft(
-    @Body() postData: { title: string; content?: string; authorEmail: string },
-  ): Promise<PostModel> {
+  async createDraft(@Body() postData: CreatePostDto): Promise<PostModel> {
     const { title, content, authorEmail } = postData;
     return this.postService.createPost({
       title,
@@ -70,9 +69,7 @@ export class AppController {
   }
 
   @Post('user')
-  async signupUser(
-    @Body() userData: { name?: string; email: string },
-  ): Promise<UserModel> {
+  async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 
