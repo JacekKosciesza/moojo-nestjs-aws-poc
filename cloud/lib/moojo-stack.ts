@@ -1,9 +1,10 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
+import { ApiGatewayCdkConstruct } from "./gw.cdk";
+import { ElbCdkConstruct } from "./elb.cdk";
 import { RdsCdkConstruct } from "./rds.cdk";
 import { VpcCdkConstruct } from "./vpc.cdk";
-import { ElbCdkConstruct } from "./elb.cdk";
 
 export class MoojoStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -14,5 +15,6 @@ export class MoojoStack extends cdk.Stack {
     const vpc = new VpcCdkConstruct(this, "vpc").vpc;
     const rds = new RdsCdkConstruct(this, "rds", { vpc });
     const elb = new ElbCdkConstruct(this, "elb", { vpc });
+    const gw = new ApiGatewayCdkConstruct(this, "gw", { vpc, elb });
   }
 }
