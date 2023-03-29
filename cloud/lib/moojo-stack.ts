@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 
 import { RdsCdkConstruct } from "./rds.cdk";
 import { VpcCdkConstruct } from "./vpc.cdk";
+import { ElbCdkConstruct } from "./elb.cdk";
 
 export class MoojoStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -12,5 +13,6 @@ export class MoojoStack extends cdk.Stack {
 
     const vpc = new VpcCdkConstruct(this, "vpc").vpc;
     const rds = new RdsCdkConstruct(this, "rds", { vpc });
+    const elb = new ElbCdkConstruct(this, "elb", { vpc });
   }
 }
