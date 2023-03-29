@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
+import { RdsCdkConstruct } from "./rds.cdk";
 import { VpcCdkConstruct } from "./vpc.cdk";
 
 export class MoojoStack extends cdk.Stack {
@@ -10,5 +11,6 @@ export class MoojoStack extends cdk.Stack {
     cdk.Tags.of(this).add("app", "Moojo");
 
     const vpc = new VpcCdkConstruct(this, "vpc").vpc;
+    const rds = new RdsCdkConstruct(this, "rds", { vpc });
   }
 }
