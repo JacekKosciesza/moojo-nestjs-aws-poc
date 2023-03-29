@@ -1,1 +1,1 @@
-# moojo-nextjs-aws-poc
+# moojo-nestjs-aws-poc
